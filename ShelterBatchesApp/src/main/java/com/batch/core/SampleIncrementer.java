@@ -9,6 +9,7 @@ public class SampleIncrementer implements JobParametersIncrementer {
     public JobParameters getNext(JobParameters parameters) {
     	 System.out.println("SampleIncrementer");
         if (parameters==null || parameters.isEmpty()) {
+        	System.out.println("hello");
         	
             return new JobParametersBuilder().addLong("run.id", 1L).toJobParameters();
             

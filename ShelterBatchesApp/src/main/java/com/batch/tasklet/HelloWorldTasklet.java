@@ -10,7 +10,7 @@ public class HelloWorldTasklet implements   Tasklet{
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("welcome to spring batch");
+		System.err.println("welcome to spring batch");
 		return null;
 	}
 

@@ -29,11 +29,11 @@ public class CustomJobScheduler {
          // get next long value 
          long value = (long)(Math.random() * 1000000);
      JobParametersBuilder jobBuilder= new JobParametersBuilder();
-      jobBuilder.addString("rundate", "1");
+      jobBuilder.addString("status", "1");
       jobBuilder.addLong("run.id", value).toJobParameters();
       jobParameters =jobBuilder.toJobParameters();
 
-    System.out.println("jobParameters:::"+jobParameters);
+    System.out.println("jobParameters for HelloJob:::"+jobParameters);
 	
 
 
