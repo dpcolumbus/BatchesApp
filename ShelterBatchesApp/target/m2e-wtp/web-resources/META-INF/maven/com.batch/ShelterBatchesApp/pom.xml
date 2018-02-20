@@ -8,7 +8,7 @@
   <name>ShelterBatchesApp Webapp</name>
   <url>http://maven.apache.org</url>
            <properties>
-		  	<spring.version>3.2.9.RELEASE</spring.version>
+		  
 		  	<spring.batch.version>3.0.4.RELEASE</spring.batch.version>
 		  	<spring.jdbc.version>4.0.5.RELEASE</spring.jdbc.version>
 		  	<hsql.version>1.8.0.7</hsql.version>
@@ -17,20 +17,27 @@
 		  	<spring.batch.admin>1.3.1.RELEASE</spring.batch.admin>
 		  	<spring.integration.version>3.0.4.RELEASE</spring.integration.version>
       </properties>
-     
+     <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+   
+	</parent>
   <dependencies>
-    <dependency>
-	<groupId>org.springframework.batch</groupId>
-	<artifactId>spring-batch-core</artifactId>
-	<version>${spring.batch.version}</version>
-</dependency>
- 
-
-   <dependency>
-	<groupId>org.springframework</groupId>
-	<artifactId>spring-web</artifactId>
-	<version>${spring.version}</version>
-</dependency>
+  <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+    
    <dependency>
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context-support</artifactId>
@@ -146,6 +153,7 @@
 	</configuration>
   </execution>
 </executions>
+
   </plugin>
     </plugins>
   </build>

@@ -27,12 +27,12 @@
 	http://www.springframework.org/schema/task
    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 		
-	  <context:component-scan base-package="com.batch.tasklet" />   
+	  <context:component-scan base-package="com.batch.*" />   
 	    
 	   <import resource="../servlet/override/context-config.xml" />   
 			  
 	
-	  <batch:job id="ShelterJOB" incrementer="sampleIncrementer">
+	  <batch:job id="ShelterJOB" incrementer="sampleIncrementer" parent="defaultJob">
 		 <batch:step id="validateJobRun" >
 				<tasklet ref="validateJobExecution">
 				 
@@ -62,7 +62,7 @@
 	
 	
 	
-	 <bean id="customScheduler" class="com.batch.core.CustomJobScheduler" />
+	<!--  <bean id="customScheduler" class="com.batch.core.CustomJobScheduler" />
 	
    <task:scheduled-tasks>
     
@@ -70,13 +70,18 @@
    
 	<task:scheduled ref="customScheduler" method="run" cron="* */5 * * * *" />
    </task:scheduled-tasks> 
-    
+     -->
    
+   <batch:job id = "defaultJob" abstract = "true" incrementer = "parametersIncrementer">
+    <batch:listeners>
+        <batch:listener ref = "jobExecutionListener"/>
+    </batch:listeners>
+</batch:job>
 	<bean id="helloWorldTasklet" class="com.batch.tasklet.HelloWorldTasklet"></bean>
 	
-	<bean id="itemReader"
+	<bean id="itemReader" scope="prototype"  
 		class="org.springframework.batch.item.database.JdbcCursorItemReader"
-		scope="step">
+	>
 		<property name="dataSource" ref="dataSource" />
 		<property name="sql"  
 			value="#{jobExecutionContext['proc']}  #{jobExecutionContext['accountingmonth']}" /> <!-- value="getData #{jobParameters['runtime']}" /> -->
@@ -86,7 +91,7 @@
 		</property>
 	</bean>
 	
-	 <bean id="flatFileItemWriter" class="org.springframework.batch.item.file.FlatFileItemWriter">
+	 <bean id="flatFileItemWriter" class="org.springframework.batch.item.file.FlatFileItemWriter" scope="prototype">
 		<property name="resource" value="file:${output.file.path}" />
 		<property name="appendAllowed" value="true" />
 		<property name="lineAggregator">
