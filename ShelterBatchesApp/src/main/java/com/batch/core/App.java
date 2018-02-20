@@ -36,45 +36,7 @@ public class App {
 	// SpringApplication.run(App.class, args);
 }
 	
-	@RequestMapping("/ShelterJOB")
-	public String handle() throws Exception {
- 
-		
-		try {
-			String[] springConfig  = 
-				{	
-						"spring/batch/jobs/job-config.xml" 
-				};
-		         JobParameters jobParameters=null;
-		        
-		        
-		             // get next long value 
-		             long value = (long)(Math.random() * 1000000);
-		         JobParametersBuilder jobBuilder= new JobParametersBuilder();
-		          jobBuilder.addString("status", "1");
-		          jobBuilder.addLong("run.id", value).toJobParameters();
-		          jobParameters =jobBuilder.toJobParameters();
 
-		        System.out.println("jobParameters:::"+jobParameters);
-		  	
-			ApplicationContext context = 
-					new ClassPathXmlApplicationContext(springConfig);
-			
-			JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
-			
-	    	
-	    	Job job = (Job) context.getBean("ShelterJOB");
-
-	    	JobExecution jobExecution = jobLauncher.run(job, jobParameters);
-	        //JobExecution jobExecution = jobLauncherTestUtils.launchStep("step1");
-		} catch (Exception e) {
-			
-		}
- 
-		return "Done";
-	
-	
-}
 	
 
 public void testJOb() throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {

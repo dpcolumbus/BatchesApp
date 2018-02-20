@@ -32,7 +32,7 @@
 	   <import resource="../servlet/override/context-config.xml" />   
 			  
 	
-	  <batch:job id="ShelterJOB" incrementer="sampleIncrementer">
+	  <batch:job id="ShelterJOB">
 		 <batch:step id="validateJobRun" >
 				<tasklet ref="validateJobExecution">
 				 
@@ -76,7 +76,7 @@
 	<bean id="itemReader"
 		class="org.springframework.batch.item.database.JdbcCursorItemReader"
 		scope="step">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="poneDataSource" />
 		<property name="sql"  
 			value="#{jobExecutionContext['proc']}  #{jobExecutionContext['accountingmonth']}" /> <!-- value="getData #{jobParameters['runtime']}" /> -->
 			
